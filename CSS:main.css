@@ -1,0 +1,88 @@
+::-webkit-scrollbar
+{
+	display: none;
+}
+
+:root,
+:root *
+{
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	-webkit-touch-callout: none;
+	-webkit-tap-highlight-color: transparent;
+	-ms-overflow-style: none;
+	scrollbar: none;
+	font-family: "Avenir Next", Avenir, Futura, Arial;
+	box-sizing: border-box;
+	outline: none;
+	
+	--background: rgb(20,20,25);
+	--background-light: rgb(35,35,40);
+	--color: white;
+}
+
+body
+{
+	background: var(--background);
+	color: var(--color);
+	text-align: center;
+	margin: 2em 0 0 0;
+	padding: 2.5px;
+}
+
+h1
+{
+	margin: 0;
+	padding: 5px;
+}
+
+a
+{
+	color: inherit;
+	text-decoration: inherit;
+}
+
+a.link
+{
+	color: rgb(20,170,255);
+	font-weight: bold;
+}
+
+ul
+{
+	text-align: left;
+}
+
+header
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	background: var(--background-light);
+	padding: 3px 15px;
+}
+
+header > *
+{
+	width: 33%;
+}
+
+header > *:first-child
+{
+	text-align: left;
+}
+
+header > *:last-child
+{
+	text-align: right;
+}
