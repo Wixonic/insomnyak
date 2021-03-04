@@ -1,6 +1,6 @@
 window.onerror = alert;
 
-const HOST = "http://localhost:9898/Local/insomnyak";
+const HOST = "https://wixonic.github.io/insomnyak";
 
 const doc = Object.freeze({
 	head: document.head,
