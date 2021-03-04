@@ -27,6 +27,6 @@ const GET = (url) =>
 window.addEventListener("DOMContentLoaded",() => {
 	try
 	{
-		doc.tag("header")[0].innerHTML = `<a href="${HOST}/index.html" class="fas fa-home"></a><b>INSOMNYAЖ</b><empty></empty>`;
+		doc.tag("header")[0].innerHTML = `<a href="${HOST}/" class="fas fa-home"></a><b>INSOMNYAЖ</b><empty></empty>`;
 	} catch {}
 });
