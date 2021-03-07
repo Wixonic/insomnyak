@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded",() => {
 					const member = members[i];
 					const grade = member.genre ? gradef[member.grade] : gradem[member.grade];
 					
-					doc.id("members").innerHTML += `<a href="../members/details/index.html?u=${i}" class="member" grade="${member.grade}"><div class="username">${member.username || "Anonyme"}</div><div class="grade">${grade || gradem[0]}</div></a>`;
+					doc.id("members").innerHTML += `<a href="../members/details/?u=${i}" class="member" grade="${member.grade}"><div class="username">${member.username || "Anonyme"}</div><div class="grade">${grade || gradem[0]}</div></a>`;
 				}
 			}).catch((e) => {
 				doc.id("members").innerHTML = `<b>An error occured</b><br />${e}`;
