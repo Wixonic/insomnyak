@@ -21,12 +21,14 @@ window.addEventListener("DOMContentLoaded",() => {
 					length[i].innerHTML = members.length;
 				}
 				
+				doc.id("members").innerHTML = "";
+
 				for (let i in members)
 				{
 					const member = members[i];
 					const grade = member.genre ? gradef[member.grade] : gradem[member.grade];
 					
-					doc.id("members").innerHTML += `<div class="member" grade="${member.grade}"><div class="username">${member.username || "Anonyme"}</div><div class="grade">${grade || gradem[0]}</div><div class="container">${member.badge ? '<div class="badge">' + member.badge + '</div>' : ""}${member.email ? '<a href="mailto:' + member.email + '" title="' + member.email + '" class="email fas fa-envelope"></a>' : ""}</div></div>`;
+					doc.id("members").innerHTML += `<a href="../members/details/index.html?u=${i}" class="member" grade="${member.grade}"><div class="username">${member.username || "Anonyme"}</div><div class="grade">${grade || gradem[0]}</div></a>`;
 				}
 			}).catch((e) => {
 				doc.id("members").innerHTML = `<b>An error occured</b><br />${e}`;

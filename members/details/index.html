@@ -6,24 +6,24 @@
 	
 	<head>
 		
-		<title>Insomnyaж - Membres</title>
+		<title>Insomnyaж - {name}</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="user-scalable=no,initial-scale=1" />
 		<meta name="robots" content="index,follow" />
 		<meta name="author" content="Wixonic" />
-		<meta property="og:title" content="Insomnyaж - Membres" />
+		<meta property="og:title" content="Insomnyaж - {name}" />
 		<meta property="og:description" content="Blocky Cars Clan" />
 		<meta property="og:url" content="https://wixonic.github.io/
-insomnyak/members/" />
+insomnyak/members/details/" />
 		<meta property="og:locale" content="fr" />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Insomnyaж" />
 		
-		<link href="../CSS/main.css" rel="stylesheet" />
-		<link href="../CSS/members/index.css" rel="stylesheet" />
+		<link href="../../CSS/main.css" rel="stylesheet" />
+		<link href="../../CSS/members/details/index.css" rel="stylesheet" />
 		
-		<script src="../JS/main.js"></script>
-		<script src="../JS/members/index.js"></script>
+		<script src="../../JS/main.js"></script>
+		<script src="../../JS/members/details/index.js"></script>
 		
 		<script src="https://kit.fontawesome.com/d7730cd825.js" crossorigin="anonymous"></script>
 		
@@ -32,13 +32,30 @@ insomnyak/members/" />
 	<body>
 		
 		<header></header>
+
+		<div class="back"><a href="../index.html"><span class="fas fa-arrow-left"></span> Retour à la liste des membres</a></div>
 		
-		<h1>Membres</h1>
+		<h1 id="name"></h1>
 		
-		<p><b>Nombre de membres</b> : <b class="membersLength">?</b><br />Cliquez sur un membre pour en savoir plus</p>
-		
-		<div id="members"><b>An error occured</b><br /></div>
-		
+		<p id="grade"></p>
+
+		<div id="container"></div>
+
+		<br />
+
+		<h3>Datas</h3>
+
+		<center><table id="datas">
+			
+			<tr>
+				
+				<th>Name</th>
+				<th>Value</th>
+
+			</tr>
+
+		</table></center>
+
 	</body>
 	
 </html>

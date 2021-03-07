@@ -1,0 +1,65 @@
+@import "../grades.css";
+
+#grade
+{
+	display: inline-block;
+	background: var(--gradeDefault);
+	border: 1px solid white;
+	border-radius: 5px;
+	padding: 3px 5px;
+}
+
+#grade[grade="9"]
+{
+	background: var(--grade9);   
+}
+
+#grade[grade="8"]
+{
+	background: var(--grade8);
+}
+
+#grade[grade="7"]
+{
+	background: var(--grade7);
+}
+
+#grade[grade="6"]
+{
+	background: var(--grade6);
+}
+
+#grade[grade="5"]
+{
+	background: var(--grade5);
+}
+
+#grade[grade="4"]
+{
+	background: var(--grade4);
+}
+
+#grade[grade="3"]
+{
+	background: var(--grade3);
+}
+
+#grade[grade="2"]
+{
+	background: var(--grade2);
+}
+
+#grade[grade="1"]
+{
+	background: var(--grade1);
+}
+
+#grade[grade="0"]
+{
+	background: var(--grade0);
+}
+
+.back
+{
+	text-align: left;
+}
