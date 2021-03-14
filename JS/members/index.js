@@ -1,42 +1,27 @@
-window.addEventListener("DOMContentLoaded",() => {
-	GET("/Datas/grades-f.json")
-	.then((gradef) =>
+const init = () =>
+{
+	Clan.members()
+	.then((members) =>
 	{
-		gradef = JSON.parse(gradef);
+		doc.id("membersLength").innerHTML = members.length;
 		
-		GET("/Datas/grades-m.json")
-		.then((gradem) =>
+		if (members.length > 0)
 		{
-			gradem = JSON.parse(gradem);
+			doc.id("members").innerHTML = "";
 			
-			GET("/Datas/members.json")
-			.then((members) =>
+			for (let i in members)
 			{
-				members = JSON.parse(members);
-				
-				const length = doc.class("membersLength");
-				
-				for (let i = 0; i < length.length; ++i)
-				{
-					length[i].innerHTML = members.length;
-				}
-				
-				doc.id("members").innerHTML = "";
-
-				for (let i in members)
+				if (i !== "length")
 				{
 					const member = members[i];
-					const grade = member.genre ? gradef[member.grade] : gradem[member.grade];
-					
-					doc.id("members").innerHTML += `<a href="../members/details/?u=${i}" class="member" grade="${member.grade}"><div class="username">${member.username || "Anonyme"}</div><div class="grade">${grade || gradem[0]}</div></a>`;
+					const grade = member.genre ? Clan.grade.f[member.grade] : Clan.grade.m[member.grade];
+					doc.id("members").innerHTML += `<a href="details/?u=${i}" class="member" grade="${member.grade}"><div class="username">${member.username || "Anonyme"}</div><div class="grade">${grade || Clan.grade.m[1]}</div></a>`;
 				}
-			}).catch((e) => {
-				doc.id("members").innerHTML = `<b>An error occured</b><br />${e}`;
-			});
-		}).catch((e) => {
-			doc.id("members").innerHTML = `<b>An error occured</b><br />${e}`;
-		});
+			}
+		} else {
+			doc.id("members").innerHTML = `<b>An error occured</b><br />We can't find members`;
+		}
 	}).catch((e) => {
 		doc.id("members").innerHTML = `<b>An error occured</b><br />${e}`;
 	});
-});
+};

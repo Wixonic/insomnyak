@@ -86,3 +86,44 @@ header > *:last-child
 {
 	text-align: right;
 }
+
+button,
+.button,
+input,
+textarea,
+select
+{
+	display: inline-block;
+	background: rgba(155,155,155,0.15);
+	color: inherit;
+	font-size: 1em;
+	text-align: center;
+	border: none;
+	border-radius: 5px;
+	margin: 3px;
+	padding: 2px 8px;
+}
+
+input,
+textarea,
+select
+{
+	-webkit-user-select: text!important;
+	-moz-user-select: unset!important;
+	-ms-user-select: all!important;
+	user-select: text!important;
+	resize: none;
+}
+
+input[type="checkbox"]
+{
+	width: 25px;
+	height: 25px;
+	background: red!important;
+	transition: background 300ms;
+}
+
+input[type="checkbox"]:checked
+{
+	background: rgb(0,150,20)!important;
+}

@@ -1,43 +1,36 @@
-window.addEventListener("DOMContentLoaded",() =>
+const init = () =>
 {
-	GET("/Datas/grades-f.json")
-	.then((gradef) =>
+	Clan.members()
+	.then((members) =>
 	{
-		gradef = JSON.parse(gradef);
-		
-		GET("/Datas/grades-m.json")
-		.then((gradem) =>
+		Clan.members(true)
+		.then((membersNotSorted) =>
 		{
-			gradem = JSON.parse(gradem);
+			const uID = window.location.search.split("&")[0].split("u=")[1];
 			
-			GET("/Datas/members.json")
-			.then((members) =>
+			try
 			{
-				members = JSON.parse(members);
+				const member = members[Number(uID)];
 				
-				const uID = window.location.search.split("&")[0].split("u=")[1];
-				if (!isNaN(uID) && uID < members.length)
+				doc.head.innerHTML = doc.head.innerHTML.replaceAll("{name}",member.username);
+				
+				doc.id("name").innerHTML = member.username;
+				doc.id("grade").setAttribute("grade",member.grade);
+				doc.id("grade").innerHTML = member.genre ? Clan.grade.f[member.grade] : Clan.grade.m[member.grade];
+				
+				if (member.email)
 				{
-					const member = members[Number(uID)];
-					
-					doc.head.innerHTML = doc.head.innerHTML.replaceAll("{name}",member.username);
-					
-					
-					doc.id("name").innerHTML = member.username;
-					doc.id("grade").setAttribute("grade",member.grade);
-					doc.id("grade").innerHTML = member.genre ? gradef[member.grade] : gradem[member.grade];
-					
-					if (member.email || member.badge)
-					{
-						doc.id("container").innerHTML = `${member.email ? "<a href=\"mailto:" + member.email + "\" class=\"fas fa-envelope\"></a>" : ""}${member.email && member.badge ? "<br />" : ""}${member.badge ? "<span class=\"badge\">" + member.badge + "</span>" : ""}`;
-					}
-
-					doc.id("datas").innerHTML = `<tr><td>Nom :</td><td>${member.username}</td></tr><tr><td>Genre :</td><td>${member.genre ? "F" : "M"}</td></tr><tr><td>Grade :</td><td>${member.grade}</td></tr><tr><td>Email :</td><td>${member.email ? "<a class=\"link\" href=\"mailto:" + member.email + "\">Oui</a>" : "Aucun"}</td></tr><tr><td>Badge(s) :</td><td>${member.badge ? member.badge : "Aucun"}</td></tr>`;
-				} else {
-					document.head.innerHTML = document.head.innerHTML.replaceAll("{name}","Oops");
-					document.body.innerHTML = "Oops ! An error occured !";
+					doc.id("container").innerHTML = member.email ? "<a href=\"mailto:" + member.email + "\" class=\"fas fa-envelope\"></a>" : "";
 				}
-			});
+				
+				doc.id("datas").innerHTML = `<tr><td>Nom :</td><td>${member.username}</td></tr><tr><td>Genre :</td><td>${member.genre ? "F" : "M"}</td></tr><tr><td>Grade :</td><td>${member.grade}</td></tr><tr><td>Email :</td><td>${member.email ? "<a class=\"link\" href=\"mailto:" + member.email + "\">Oui</a>" : "Aucun"}</td></tr><tr><td>Recruté </td><td>${member.recruited == -1 ? "avant la mise à jour du site" : "par " + membersNotSorted[member.recruited].username}.</td></tr>`;
+			} catch(e) {
+				document.head.innerHTML = document.head.innerHTML.replaceAll("{name}","Oops");
+				document.body.innerHTML = "Oops ! An error occured !<br />" + e;
+			}
+		}).catch(e => {
+			document.head.innerHTML = document.head.innerHTML.replaceAll("{name}","Oops");
+			document.body.innerHTML = "Oops ! An error occured !<br />" + e;
 		});
 	});
-});
+};

@@ -1,9 +1,8 @@
-window.addEventListener("DOMContentLoaded",() => {
-	GET("/Datas/news.json")
+const init = () =>
+{
+	Clan.news()
 	.then((news) =>
 	{
-		news = JSON.parse(news);
-		
 		if (news.length > 0)
 		{
 			doc.id("news").innerHTML = "";
@@ -16,4 +15,4 @@ window.addEventListener("DOMContentLoaded",() => {
 	}).catch((e) => {
 		doc.id("news").innerHTML = `<b>An error occured</b><br />${e}`;
 	});
-});
+};

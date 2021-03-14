@@ -22,6 +22,9 @@ insomnyak/members/" />
 		<link href="../CSS/main.css" rel="stylesheet" />
 		<link href="../CSS/members/index.css" rel="stylesheet" />
 		
+		<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+		
 		<script src="../JS/main.js"></script>
 		<script src="../JS/members/index.js"></script>
 		
@@ -35,9 +38,9 @@ insomnyak/members/" />
 		
 		<h1>Membres</h1>
 		
-		<p><b>Nombre de membres</b> : <b class="membersLength">?</b><br />Cliquez sur un membre pour en savoir plus</p>
+		<p><b>Nombre de membres</b> : <b id="membersLength">?</b><br />Cliquez sur un membre pour en savoir plus</p>
 		
-		<div id="members"><b>An error occured</b><br /></div>
+		<div id="members"><b>Loading...</b><br /></div>
 		
 	</body>
 	

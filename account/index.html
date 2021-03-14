@@ -1,0 +1,145 @@
+<!-- Created by Wixonic -->
+
+<!DOCTYPE html>
+
+<html lang="fr">
+	
+	<head>
+		
+		<title>Insomnyaж - Compte</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="user-scalable=no,initial-scale=1" />
+		<meta name="robots" content="noindex,nofollow" />
+		<meta name="author" content="Wixonic" />
+		<meta property="og:title" content="Insomnyaж - Compte" />
+		<meta property="og:description" content="Blocky Cars Clan" />
+		<meta property="og:url" content="https://wixonic.github.io/
+insomnyak/account/" />
+		<meta property="og:locale" content="fr" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Insomnyaж" />
+		
+		<link href="../CSS/main.css" rel="stylesheet" />
+		<link href="../CSS/account/index.css" rel="stylesheet" />
+		<link href="../CSS/members/index.css" rel="stylesheet" />
+		
+		<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+		
+		<script src="../JS/main.js"></script>
+		<script src="../JS/account/index.js"></script>
+		
+		<script src="https://kit.fontawesome.com/d7730cd825.js" crossorigin="anonymous"></script>
+		
+	</head>
+	
+	<body>
+		
+		<div id="form">
+			
+			<h1>Compte</h1>
+			
+			<div id="error"></div>
+			
+			<input type="text" id="username" name="username" placeholder="Nom d'utilisateur" />
+			
+			<input type="password" id="password-id" name="password" placeholder="Mot de passe" />
+			
+			<button onclick="connect();">Connexion</button>
+			
+			<a class="link" href="mailto:wixonic@icloud.com?subject=Nom%20d'utilisateur%20ou%20mot%20de%20passe%20oubli%C3%A9">Nom d'utilisateur ou mot de passe oublié ?</a>
+			
+		</div>
+
+		<div id="overview">
+			
+			<div class="log" id="nameLog"><span id="nameLog-text"></span> <button class="fas fa-times" onclick='doc.id("nameLog").style.display = "none";'></button></div>
+
+			<br />
+
+			<span style="color: transparent;" class="fas fa-eye"></span> <input type="text" id="name" onblur="changeName(this.value);" /> <label for="name"><span class="fas fa-pen"></span></label>
+			
+			<div class="log" id="emailLog"><span id="emailLog-text"></span> <button class="fas fa-times" onclick='doc.id("emailLog").style.display = "none";'></button></div>
+
+			<br />
+
+			<span style="color: transparent;" class="fas fa-eye"></span> <input type="email" id="email" onblur="changeEmail(this.value);" /> <label for="email"><span class="fas fa-pen"></span></label>
+
+			<div class="log" id="passwordLog"><span id="passwordLog-text"></span> <button class="fas fa-times" onclick='doc.id("passwordLog").style.display = "none";'></button></div>
+			
+			<br />
+			
+			<span onclick="doc.id('password').setAttribute('type',doc.id('password').getAttribute('type') == 'text' ? 'password' : 'text');" class="fas fa-eye"></span> <input type="password" id="password" onblur="changePassword(this.value);" /> <label for="password"><span class="fas fa-pen"></span></label>
+			
+			<br /><br />
+			
+			<span id="grade"></span>
+			
+			<br /><br />
+			
+			<button id="members-btn" onclick="getMembers(); doc.id('overview').style.display = 'none'; doc.id('members').style.display = 'block';">Membres</button> <button id="news-btn" onclick="getNews(); doc.id('overview').style.display = 'none'; doc.id('news').style.display = 'block';">Nouveautés</button>
+			
+		</div>
+		
+		<div id="members">
+			
+			<button onclick="doc.id('overview').style.display = 'block'; doc.id('members').style.display = 'none';"><i class="fas fa-arrow-left"></i></button> <button onclick="getMembers();"><i class="fas fa-redo"></i></button> <button id="recruit-btn" onclick="newMember();"><i class="fas fa-plus"></i></button>
+			
+			<h1>Membres</h1>
+			
+			<div id="members-cont"><b>An error occurred</b><br />We can't find members</div>
+			
+		</div>
+		
+		<div id="news">
+			
+			<button onclick="doc.id('overview').style.display = 'block'; doc.id('news').style.display = 'none';"><i class="fas fa-arrow-left"></i></button> <button onclick="getNews();"><i class="fas fa-redo"></i></button> <!--button id="newnews-btn" onclick="newNews();"><i class="fas fa-plus"></i></button-->
+			
+			<h1>Nouveautés</h1>
+			
+			<div id="news-cont">Aucune nouveauté recemment.</div>
+			
+		</div>
+		
+		<div id="members-editor">
+			
+			<button onclick="doc.id('members').style.display = 'block'; doc.id('members-editor').style.display = 'none'; getMembers();"><i class="fas fa-times"></i></button> <button onclick="updateMember(Number(doc.id('members-editor-id').value),doc.id('members-editor-username').value,Number(doc.id('members-editor-grade').value),Number(doc.id('members-editor-genre').value),doc.id('members-editor-email').value,{banish: doc.id('members-editor-rights-banish').checked,news: doc.id('members-editor-rights-news').checked,promote: doc.id('members-editor-rights-promote').checked,recruit: doc.id('members-editor-rights-recruit').checked}).then(() => {getMembers(); doc.id('members').style.display = 'block'; doc.id('members-editor').style.display = 'none';});"><i class="fas fa-check"></i></button>
+			
+			<hr />
+			
+			<label for="members-editor-id">ID:</label> <input id="members-editor-id" disabled type="number" value="0" /><br />
+			
+			<label for="members-editor-username">Nom:</label> <input id="members-editor-username" type="text" /><br />
+			
+			<label for="members-editor-grade">Grade:</label> <select id="members-editor-grade"></select><br />
+			
+			<label for="members-editor-genre">Genre :</label> <select id="members-editor-genre"><option value="0">M</option><option value="1">F</option></select><br />
+			
+			<label for="members-editor-email">Email :</label> <input id="members-editor-email" type="email" /><br />
+			
+			<br />
+			
+			<h3>Droits</h3>
+			
+			<label for="members-editor-rights-recruit">Recruter :</label> <input id="members-editor-rights-recruit" type="checkbox" /><br />
+			<label for="members-editor-rights-promote">Promouvoir :</label> <input id="members-editor-rights-promote" type="checkbox" /><br />
+			<label for="members-editor-rights-news">Nouveautés :</label> <input id="members-editor-rights-news" type="checkbox" /><br />
+			<label for="members-editor-rights-banish">Bannir :</label> <input id="members-editor-rights-banish" type="checkbox" />
+			
+		</div>
+		
+		<!--div id="news-editor">
+			
+			<button onclick="doc.id('news').style.display = 'block'; doc.id('news-editor').style.display = 'none'; getNews();"><i class="fas fa-times"></i></button> <button onclick="addNews().then(() => {getNews(); doc.id('news').style.display = 'block'; doc.id('news-editor').style.display = 'none';});"><i class="fas fa-check"></i></button>
+			
+			<hr />
+			
+			Soon...
+			
+		</div-->
+		
+	</body>
+	
+</html>
+
+<!-- Created by Wixonic -->
