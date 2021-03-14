@@ -42,7 +42,7 @@ const Clan = Object.freeze({
 							{
 								if (members[m].grade == i)
 								{
-									membersSorted.length > 0 ?membersSorted.push(members[m]) : membersSorted = [members[m]];
+									membersSorted.length > 0 ? membersSorted.push(members[m]) : membersSorted = [members[m]];
 								}
 							}
 						}
