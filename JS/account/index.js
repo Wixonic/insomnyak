@@ -283,18 +283,29 @@ const newMember = () =>
 	{
 		doc.id("members-editor-id").value = members.length + 1;
 		
-		for (let i in Clan.grade.m)
+		if (window.user.rights.promote)
 		{
-			if (i < window.member.grade)
+			for (let i in Clan.grade.m)
+			{
+				if (i < window.member.grade)
+				{
+					if (i > 0 || window.user.rights.banish)
+					{
+						doc.id("members-editor-grade").innerHTML += `<option ${i == 1 ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+					}
+				} else {
+					if (i > 0 || window.user.rights.banish)
+					{
+						doc.id("members-editor-grade").innerHTML += `<option disabled ${i == 1 ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+					}
+				}
+			}
+		} else {
+			for (let i in Clan.grade.m)
 			{
 				if (i > 0 || window.user.rights.banish)
 				{
-					doc.id("members-editor-grade").innerHTML += `<option ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
-				}
-			} else {
-				if (i > 0 || window.user.rights.banish)
-				{
-					doc.id("members-editor-grade").innerHTML += `<option disabled ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+					doc.id("members-editor-grade").innerHTML += `<option disabled ${i == 1 ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
 				}
 			}
 		}
@@ -350,15 +361,26 @@ const alreadyMember = (id) =>
 					doc.id("members-editor-username").setAttribute("disabled","true");
 				}
 				
-				for (let i in Clan.grade.m)
+				if (window.user.rights.promote)
 				{
-					if (i < window.member.grade)
+					for (let i in Clan.grade.m)
 					{
-						if (i > 0 || window.user.rights.banish)
+						if (i < window.member.grade)
 						{
-							doc.id("members-editor-grade").innerHTML += `<option ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+							if (i > 0 || window.user.rights.banish)
+							{
+								doc.id("members-editor-grade").innerHTML += `<option ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+							}
+						} else {
+							if (i > 0 || window.user.rights.banish)
+							{
+								doc.id("members-editor-grade").innerHTML += `<option disabled ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+							}
 						}
-					} else {
+					}
+				} else {
+					for (let i in Clan.grade.m)
+					{
 						if (i > 0 || window.user.rights.banish)
 						{
 							doc.id("members-editor-grade").innerHTML += `<option disabled ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
