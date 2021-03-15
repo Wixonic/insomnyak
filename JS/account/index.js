@@ -281,7 +281,7 @@ const newMember = () =>
 	Clan.members()
 	.then((members) =>
 	{
-		doc.id("members-editor-id").value = members.length;
+		doc.id("members-editor-id").value = members.length + 1;
 		
 		for (let i in Clan.grade.m)
 		{
