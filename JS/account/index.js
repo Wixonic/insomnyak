@@ -266,7 +266,8 @@ const memberReset = () =>
 	doc.id("members-editor-username").removeAttribute("disabled");
 	doc.id("members-editor-genre").removeAttribute("disabled");
 	doc.id("members-editor-email").removeAttribute("disabled");
-
+	doc.id("members-editor-grade").innerHTML = "";
+	doc.id("members-editor-genre").innerHTML = `<option selected value="0">M</option><option value="1">F</option>`;
 	doc.id("members-editor-rights-banish").removeAttribute("disabled");
 	doc.id("members-editor-rights-news").removeAttribute("disabled");
 	doc.id("members-editor-rights-promote").removeAttribute("disabled");
@@ -284,7 +285,18 @@ const newMember = () =>
 		
 		for (let i in Clan.grade.m)
 		{
-			doc.id("members-editor-grade").innerHTML += `<option ${i == 1 ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+			if (i < window.member.grade)
+			{
+				if (i > 0 || window.user.rights.banish)
+				{
+					doc.id("members-editor-grade").innerHTML += `<option ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+				}
+			} else {
+				if (i > 0 || window.user.rights.banish)
+				{
+					doc.id("members-editor-grade").innerHTML += `<option disabled ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+				}
+			}
 		}
 
 		if (!window.user.rights.banish)
@@ -345,6 +357,11 @@ const alreadyMember = (id) =>
 						if (i > 0 || window.user.rights.banish)
 						{
 							doc.id("members-editor-grade").innerHTML += `<option ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
+						}
+					} else {
+						if (i > 0 || window.user.rights.banish)
+						{
+							doc.id("members-editor-grade").innerHTML += `<option disabled ${i == members[id].grade ? "selected" : ""} value="${i}">${Clan.grade.m[i]}</option>`;
 						}
 					}
 				}
